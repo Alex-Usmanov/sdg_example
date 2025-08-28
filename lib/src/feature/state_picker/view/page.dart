@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sdg_example/src/feature/city_picker/view/country_dropdown/country_dropdown.dart';
-import 'package:sdg_example/src/feature/city_picker/view/state_dropdown/state_dropdown.dart';
+import 'package:sdg_example/src/feature/state_picker/view/country_dropdown/country_dropdown.dart';
+import 'package:sdg_example/src/feature/state_picker/view/state_dropdown/state_dropdown.dart';
 
 import '../data/api/city_picker_api.dart';
 

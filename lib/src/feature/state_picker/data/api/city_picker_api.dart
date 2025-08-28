@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:sdg_example/src/feature/city_picker/data/interface/country_source.dart';
+import 'package:sdg_example/src/feature/state_picker/data/interface/country_source.dart';
 
 import '../interface/state_source.dart';
 import '../model/country/country.dart';
