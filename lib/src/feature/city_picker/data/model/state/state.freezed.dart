@@ -13,22 +13,22 @@ part of 'state.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$State {
+mixin _$StateModel {
 
 @JsonKey(name: 'value') String get name;@JsonKey(name: 'id') String get id;
-/// Create a copy of State
+/// Create a copy of StateModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$StateCopyWith<State> get copyWith => _$StateCopyWithImpl<State>(this as State, _$identity);
+$StateModelCopyWith<StateModel> get copyWith => _$StateModelCopyWithImpl<StateModel>(this as StateModel, _$identity);
 
-  /// Serializes this State to a JSON map.
+  /// Serializes this StateModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is State&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,name,id);
 
 @override
 String toString() {
-  return 'State(name: $name, id: $id)';
+  return 'StateModel(name: $name, id: $id)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $StateCopyWith<$Res>  {
-  factory $StateCopyWith(State value, $Res Function(State) _then) = _$StateCopyWithImpl;
+abstract mixin class $StateModelCopyWith<$Res>  {
+  factory $StateModelCopyWith(StateModel value, $Res Function(StateModel) _then) = _$StateModelCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'value') String name,@JsonKey(name: 'id') String id
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$StateCopyWithImpl<$Res>
-    implements $StateCopyWith<$Res> {
-  _$StateCopyWithImpl(this._self, this._then);
+class _$StateModelCopyWithImpl<$Res>
+    implements $StateModelCopyWith<$Res> {
+  _$StateModelCopyWithImpl(this._self, this._then);
 
-  final State _self;
-  final $Res Function(State) _then;
+  final StateModel _self;
+  final $Res Function(StateModel) _then;
 
-/// Create a copy of State
+/// Create a copy of StateModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? id = null,}) {
   return _then(_self.copyWith(
@@ -76,8 +76,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [State].
-extension StatePatterns on State {
+/// Adds pattern-matching-related methods to [StateModel].
+extension StateModelPatterns on StateModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -90,10 +90,10 @@ extension StatePatterns on State {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _State value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _StateModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _State() when $default != null:
+case _StateModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -112,10 +112,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _State value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _StateModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _State():
+case _StateModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -133,10 +133,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _State value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _StateModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _State() when $default != null:
+case _StateModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -156,7 +156,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'value')  String name, @JsonKey(name: 'id')  String id)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _State() when $default != null:
+case _StateModel() when $default != null:
 return $default(_that.name,_that.id);case _:
   return orElse();
 
@@ -177,7 +177,7 @@ return $default(_that.name,_that.id);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'value')  String name, @JsonKey(name: 'id')  String id)  $default,) {final _that = this;
 switch (_that) {
-case _State():
+case _StateModel():
 return $default(_that.name,_that.id);case _:
   throw StateError('Unexpected subclass');
 
@@ -197,7 +197,7 @@ return $default(_that.name,_that.id);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'value')  String name, @JsonKey(name: 'id')  String id)?  $default,) {final _that = this;
 switch (_that) {
-case _State() when $default != null:
+case _StateModel() when $default != null:
 return $default(_that.name,_that.id);case _:
   return null;
 
@@ -209,27 +209,27 @@ return $default(_that.name,_that.id);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _State implements State {
-   _State({@JsonKey(name: 'value') required this.name, @JsonKey(name: 'id') required this.id});
-  factory _State.fromJson(Map<String, dynamic> json) => _$StateFromJson(json);
+class _StateModel implements StateModel {
+   _StateModel({@JsonKey(name: 'value') required this.name, @JsonKey(name: 'id') required this.id});
+  factory _StateModel.fromJson(Map<String, dynamic> json) => _$StateModelFromJson(json);
 
 @override@JsonKey(name: 'value') final  String name;
 @override@JsonKey(name: 'id') final  String id;
 
-/// Create a copy of State
+/// Create a copy of StateModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$StateCopyWith<_State> get copyWith => __$StateCopyWithImpl<_State>(this, _$identity);
+_$StateModelCopyWith<_StateModel> get copyWith => __$StateModelCopyWithImpl<_StateModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$StateToJson(this, );
+  return _$StateModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _State&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StateModel&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -238,15 +238,15 @@ int get hashCode => Object.hash(runtimeType,name,id);
 
 @override
 String toString() {
-  return 'State(name: $name, id: $id)';
+  return 'StateModel(name: $name, id: $id)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$StateCopyWith<$Res> implements $StateCopyWith<$Res> {
-  factory _$StateCopyWith(_State value, $Res Function(_State) _then) = __$StateCopyWithImpl;
+abstract mixin class _$StateModelCopyWith<$Res> implements $StateModelCopyWith<$Res> {
+  factory _$StateModelCopyWith(_StateModel value, $Res Function(_StateModel) _then) = __$StateModelCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'value') String name,@JsonKey(name: 'id') String id
@@ -257,17 +257,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$StateCopyWithImpl<$Res>
-    implements _$StateCopyWith<$Res> {
-  __$StateCopyWithImpl(this._self, this._then);
+class __$StateModelCopyWithImpl<$Res>
+    implements _$StateModelCopyWith<$Res> {
+  __$StateModelCopyWithImpl(this._self, this._then);
 
-  final _State _self;
-  final $Res Function(_State) _then;
+  final _StateModel _self;
+  final $Res Function(_StateModel) _then;
 
-/// Create a copy of State
+/// Create a copy of StateModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? id = null,}) {
-  return _then(_State(
+  return _then(_StateModel(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,
@@ -281,7 +281,7 @@ as String,
 /// @nodoc
 mixin _$StateResponse {
 
- List<State> get states;
+ List<StateModel> get states;
 /// Create a copy of StateResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -314,7 +314,7 @@ abstract mixin class $StateResponseCopyWith<$Res>  {
   factory $StateResponseCopyWith(StateResponse value, $Res Function(StateResponse) _then) = _$StateResponseCopyWithImpl;
 @useResult
 $Res call({
- List<State> states
+ List<StateModel> states
 });
 
 
@@ -334,7 +334,7 @@ class _$StateResponseCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? states = null,}) {
   return _then(_self.copyWith(
 states: null == states ? _self.states : states // ignore: cast_nullable_to_non_nullable
-as List<State>,
+as List<StateModel>,
   ));
 }
 
@@ -419,7 +419,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<State> states)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<StateModel> states)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _StateResponse() when $default != null:
 return $default(_that.states);case _:
@@ -440,7 +440,7 @@ return $default(_that.states);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<State> states)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<StateModel> states)  $default,) {final _that = this;
 switch (_that) {
 case _StateResponse():
 return $default(_that.states);case _:
@@ -460,7 +460,7 @@ return $default(_that.states);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<State> states)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<StateModel> states)?  $default,) {final _that = this;
 switch (_that) {
 case _StateResponse() when $default != null:
 return $default(_that.states);case _:
@@ -475,11 +475,11 @@ return $default(_that.states);case _:
 @JsonSerializable()
 
 class _StateResponse implements StateResponse {
-   _StateResponse(final  List<State> states): _states = states;
+   _StateResponse(final  List<StateModel> states): _states = states;
   factory _StateResponse.fromJson(Map<String, dynamic> json) => _$StateResponseFromJson(json);
 
- final  List<State> _states;
-@override List<State> get states {
+ final  List<StateModel> _states;
+@override List<StateModel> get states {
   if (_states is EqualUnmodifiableListView) return _states;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_states);
@@ -519,7 +519,7 @@ abstract mixin class _$StateResponseCopyWith<$Res> implements $StateResponseCopy
   factory _$StateResponseCopyWith(_StateResponse value, $Res Function(_StateResponse) _then) = __$StateResponseCopyWithImpl;
 @override @useResult
 $Res call({
- List<State> states
+ List<StateModel> states
 });
 
 
@@ -539,7 +539,7 @@ class __$StateResponseCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? states = null,}) {
   return _then(_StateResponse(
 null == states ? _self._states : states // ignore: cast_nullable_to_non_nullable
-as List<State>,
+as List<StateModel>,
   ));
 }
 

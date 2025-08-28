@@ -6,18 +6,16 @@ part of 'state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_State _$StateFromJson(Map<String, dynamic> json) =>
-    _State(name: json['value'] as String, id: json['id'] as String);
+_StateModel _$StateModelFromJson(Map<String, dynamic> json) =>
+    _StateModel(name: json['value'] as String, id: json['id'] as String);
 
-Map<String, dynamic> _$StateToJson(_State instance) => <String, dynamic>{
-  'value': instance.name,
-  'id': instance.id,
-};
+Map<String, dynamic> _$StateModelToJson(_StateModel instance) =>
+    <String, dynamic>{'value': instance.name, 'id': instance.id};
 
 _StateResponse _$StateResponseFromJson(Map<String, dynamic> json) =>
     _StateResponse(
       (json['states'] as List<dynamic>)
-          .map((e) => State.fromJson(e as Map<String, dynamic>))
+          .map((e) => StateModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

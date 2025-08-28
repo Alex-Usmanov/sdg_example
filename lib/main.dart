@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdg_example/src/feature/city_picker/view/city_picker_page.dart';
+import 'package:sdg_example/src/feature/city_picker/view/page.dart';
 
 void main() {
   runApp(const MyApp());
