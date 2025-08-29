@@ -3,7 +3,6 @@ import 'package:sdg_example/src/feature/state_picker/data/interface/state_source
 import 'package:sdg_example/src/feature/state_picker/data/model/country/country.dart';
 import 'package:sdg_example/src/feature/state_picker/data/model/state/state.dart';
 
-/// Fake implementation of CountrySource for testing
 class FakeCountrySource implements CountrySource {
   final Future<List<CountryModel>> Function() callback;
 
@@ -13,7 +12,6 @@ class FakeCountrySource implements CountrySource {
   Future<List<CountryModel>> getCountries() => callback();
 }
 
-/// Fake implementation of StateSource for testing
 class FakeStateSource implements StateSource {
   final Future<List<StateModel>> Function(String countryId) callback;
 
