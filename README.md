@@ -11,7 +11,7 @@
 ## Highlights
 1. interface segregation in data layer
 2. based on components: country and city dropdowns could be dropped into another screen if needed. could take in loaded data externally if needed. very flexible is what i am getting at.
-3. highly observable: analytics and error logging (you can find interesting data in the console too). theoretically you could build dashboards and stuff with logging
+3. highly observable: analytics and error logging (you can find interesting data in the console too). theoretically you could build dashboards and stuff with this information
 4. its tested!!!! there are tests!!! seriously, check them out, please.
 5. it handles lack of internet gracefully
 6. state management: using built-in flutter's valuenotifier+valuelistenablebuilder. no crazy concurrency here hence no need for state management
