@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sdg_example/src/feature/state_picker/view/country_dropdown/country_dropdown.dart';
 import 'package:sdg_example/src/feature/state_picker/view/state_dropdown/state_dropdown.dart';
 
-import '../data/api/city_picker_api.dart';
 import '../data/interface/country_source.dart';
 import '../data/interface/state_source.dart';
 
 class CityPickerPage extends StatefulWidget {
-  final CountrySource? countrySource;
-  final StateSource? stateSource;
+  final CountrySource countrySource;
+  final StateSource stateSource;
 
-  const CityPickerPage({super.key, this.countrySource, this.stateSource});
+  const CityPickerPage({
+    super.key,
+    required this.countrySource,
+    required this.stateSource,
+  });
 
   @override
   State<CityPickerPage> createState() => _CityPickerPageState();
@@ -25,10 +28,8 @@ class _CityPickerPageState extends State<CityPickerPage> {
   void initState() {
     super.initState();
 
-    // in real app this would generally be managed via some di framework
-    final api = CityPickerApi();
-    final countrySource = widget.countrySource ?? api;
-    final stateSource = widget.stateSource ?? api;
+    final countrySource = widget.countrySource;
+    final stateSource = widget.stateSource;
 
     _countryPickerController = CountryDropdownController(
       citySource: countrySource,

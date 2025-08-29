@@ -7,6 +7,7 @@ import '../interface/state_source.dart';
 import '../model/country/country.dart';
 import '../model/state/state.dart';
 
+// request cancellation could be added, but lets consider that overkill in this example
 class CityPickerApi implements CountrySource, StateSource {
   @override
   Future<List<CountryModel>> getCountries() async {
