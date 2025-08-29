@@ -1,5 +1,7 @@
 # sdg_example
 
+Video demo: https://drive.google.com/file/d/1RDpYWEYkXHMvYbjudM1AQFHSEc7izOy6/view?usp=sharing
+
 ## Things considered out of scope
 1. Navigation
 2. Localization (hence no language headers for api for example, or localized strings)
