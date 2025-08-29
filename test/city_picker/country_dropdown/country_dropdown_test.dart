@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sdg_example/src/feature/state_picker/data/interface/country_source.dart';
 import 'package:sdg_example/src/feature/state_picker/data/model/country/country.dart';
 import 'package:sdg_example/src/feature/state_picker/view/country_dropdown/country_dropdown.dart';
 
 import '../../common/make_widget_testable.dart';
+import '../../common/test_fakes.dart';
 
-class _FakeCountrySource implements CountrySource {
-  final Future<List<CountryModel>> Function() callback;
-
-  _FakeCountrySource({required this.callback});
-
-  @override
-  Future<List<CountryModel>> getCountries() => callback();
-}
+// about warnIfMissed: false
+// look ridiculous i know.
+// but for some reason when tapping dropdowns the
+// test prints a warning about tapping something that is not tappable when it really it
+// maybe i am missing something, but anyways too much time was spent on this already
 
 void main() {
   testWidgets('is loading at start', (tester) async {
@@ -21,7 +18,7 @@ void main() {
       makeWidgetTestable(
         CountryDropdown(
           controller: CountryDropdownController(
-            citySource: _FakeCountrySource(
+            citySource: FakeCountrySource(
               callback: () async {
                 await Future.delayed(const Duration(seconds: 8));
                 return [];
@@ -48,7 +45,7 @@ void main() {
       makeWidgetTestable(
         CountryDropdown(
           controller: CountryDropdownController(
-            citySource: _FakeCountrySource(
+            citySource: FakeCountrySource(
               callback: () async {
                 return [
                   CountryModel(id: '1', name: 'Russia'),
@@ -65,18 +62,18 @@ void main() {
     // Wait for data to load
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text("Select a country..."), warnIfMissed: false);
+    await tester.tap(find.text('Select a country...'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(
-      find.text("Russia"),
+      find.text('Russia'),
       findsWidgets,
-      reason: "Russia country should be visible in dropdown options",
+      reason: 'Russia country should be visible in dropdown options',
     );
     expect(
-      find.text("USA"),
+      find.text('USA'),
       findsWidgets,
-      reason: "USA country should be visible in dropdown options",
+      reason: 'USA country should be visible in dropdown options',
     );
   });
 
@@ -85,9 +82,9 @@ void main() {
       makeWidgetTestable(
         CountryDropdown(
           controller: CountryDropdownController(
-            citySource: _FakeCountrySource(
+            citySource: FakeCountrySource(
               callback: () async {
-                throw Exception("Test error");
+                throw Exception('Test error');
               },
             ),
           ),
@@ -99,9 +96,9 @@ void main() {
     await tester.pump(const Duration(seconds: 11));
 
     expect(
-      find.text("Try again"),
+      find.text('Try again'),
       findsOne,
-      reason: "Error happened, hence retry button should be shown",
+      reason: 'Error happened, hence retry button should be shown',
     );
   });
 
@@ -112,12 +109,12 @@ void main() {
       makeWidgetTestable(
         CountryDropdown(
           controller: CountryDropdownController(
-            citySource: _FakeCountrySource(
+            citySource: FakeCountrySource(
               callback: () async {
                 retryCount++;
 
                 if (retryCount == 1) {
-                  throw Exception("Test error");
+                  throw Exception('Test error');
                 }
 
                 return [
@@ -133,32 +130,32 @@ void main() {
     );
 
     expect(
-      find.text("Try again"),
+      find.text('Try again'),
       findsOne,
-      reason: "Error happened, hence retry button should be shown",
+      reason: 'Error happened, hence retry button should be shown',
     );
 
-    await tester.tap(find.text("Try again"));
+    await tester.tap(find.text('Try again'));
     await tester.pump(const Duration(seconds: 1));
 
     expect(
-      find.text("Try again"),
+      find.text('Try again'),
       findsNothing,
-      reason: "After successful retry, error button should be hidden",
+      reason: 'After successful retry, error button should be hidden',
     );
 
-    await tester.tap(find.text("Select a country..."), warnIfMissed: false);
+    await tester.tap(find.text('Select a country...'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(
-      find.text("Russia"),
+      find.text('Russia'),
       findsWidgets,
-      reason: "After retry, Russia country should be visible in dropdown",
+      reason: 'After retry, Russia country should be visible in dropdown',
     );
     expect(
-      find.text("USA"),
+      find.text('USA'),
       findsWidgets,
-      reason: "After retry, USA country should be visible in dropdown",
+      reason: 'After retry, USA country should be visible in dropdown',
     );
   });
 
@@ -168,7 +165,7 @@ void main() {
       makeWidgetTestable(
         CountryDropdown(
           controller: CountryDropdownController(
-            citySource: _FakeCountrySource(
+            citySource: FakeCountrySource(
               callback: () async {
                 return [
                   CountryModel(id: '1', name: 'Russia'),
@@ -188,22 +185,22 @@ void main() {
     await tester.pumpAndSettle();
 
     // Find and tap the dropdown menu text field to open it
-    await tester.tap(find.text("Select a country..."), warnIfMissed: false);
+    await tester.tap(find.text('Select a country...'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     // Now tap on the specific country option
-    await tester.tap(find.text("Russia").last);
+    await tester.tap(find.text('Russia').last);
     await tester.pumpAndSettle();
 
     expect(
       selectedCountry,
       isNotNull,
-      reason: "Country should be selected when tapping dropdown option",
+      reason: 'Country should be selected when tapping dropdown option',
     );
     expect(
       selectedCountry?.id,
-      "1",
-      reason: "Selected country should have correct ID (Russia)",
+      '1',
+      reason: 'Selected country should have correct ID (Russia)',
     );
   });
 }

@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'state.freezed.dart';
 part 'state.g.dart';
 
-// "model" suffix mostly to prevent name clashing with ui layer (state - statefulwidget etc)
+// 'model' suffix mostly to prevent name clashing with ui layer (state - statefulwidget etc)
 @freezed
 abstract class StateModel with _$StateModel {
   factory StateModel({

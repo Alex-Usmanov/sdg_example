@@ -47,7 +47,7 @@ class StateDropdownController extends ValueNotifier<StateDropdownState> {
       value = StateDropdownState.error(error);
     } on TimeoutException catch (error, stackTrace) {
       value = StateDropdownState.error(error);
-      Analytics.logEvent("state_dropdown/timeout");
+      Analytics.logEvent('state_dropdown/timeout');
       Analytics.reportError(error, stackTrace);
     } catch (error, stackTrace) {
       value = StateDropdownState.error(error);
@@ -82,12 +82,12 @@ class StateDropdown extends StatelessWidget {
                 Analytics.logEvent('state_dropdown/retry');
                 controller.loadCountries(countryId);
               },
-              label: Text("Try again"),
+              label: Text('Try again'),
               icon: Icon(Icons.warning),
             );
           case StateDropdownStateData():
             return DropdownMenu<StateModel>(
-              hintText: "Select a state...",
+              hintText: 'Select a state...',
               onSelected: (stateModel) {
                 Analytics.logEvent(
                   'state_dropdown/state_selected',

@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sdg_example/src/feature/state_picker/data/interface/state_source.dart';
 import 'package:sdg_example/src/feature/state_picker/data/model/state/state.dart';
 import 'package:sdg_example/src/feature/state_picker/view/state_dropdown/state_dropdown.dart';
 
 import '../../common/make_widget_testable.dart';
+import '../../common/test_fakes.dart';
 
-class _FakeStateSource implements StateSource {
-  final Future<List<StateModel>> Function(String countryId) callback;
-
-  _FakeStateSource({required this.callback});
-
-  @override
-  Future<List<StateModel>> getStates(String countryId) => callback(countryId);
-}
+// about warnIfMissed: false
+// look ridiculous i know.
+// but for some reason when tapping dropdowns the
+// test prints a warning about tapping something that is not tappable when it really it
+// maybe i am missing something, but anyways too much time was spent on this already
 
 void main() {
   testWidgets('is loading at start', (tester) async {
@@ -22,7 +19,7 @@ void main() {
         StateDropdown(
           countryId: 'test-country',
           controller: StateDropdownController(
-            citySource: _FakeStateSource(
+            citySource: FakeStateSource(
               callback: (countryId) async {
                 await Future.delayed(const Duration(seconds: 8));
                 return [];
@@ -46,7 +43,7 @@ void main() {
 
   testWidgets('shows data', (tester) async {
     final controller = StateDropdownController(
-      citySource: _FakeStateSource(
+      citySource: FakeStateSource(
         callback: (countryId) async {
           return [
             StateModel(id: '1', name: 'California'),
@@ -69,26 +66,26 @@ void main() {
     controller.loadCountries('test-country');
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text("Select a state..."), warnIfMissed: false);
+    await tester.tap(find.text('Select a state...'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(
-      find.text("California"),
+      find.text('California'),
       findsWidgets,
-      reason: "California state should be visible in dropdown options",
+      reason: 'California state should be visible in dropdown options',
     );
     expect(
-      find.text("Texas"),
+      find.text('Texas'),
       findsWidgets,
-      reason: "Texas state should be visible in dropdown options",
+      reason: 'Texas state should be visible in dropdown options',
     );
   });
 
   testWidgets('shows error', (tester) async {
     final controller = StateDropdownController(
-      citySource: _FakeStateSource(
+      citySource: FakeStateSource(
         callback: (countryId) async {
-          throw Exception("Test error");
+          throw Exception('Test error');
         },
       ),
     );
@@ -108,9 +105,9 @@ void main() {
     await tester.pump(const Duration(seconds: 11));
 
     expect(
-      find.text("Try again"),
+      find.text('Try again'),
       findsOne,
-      reason: "Error happened, hence retry button should be shown",
+      reason: 'Error happened, hence retry button should be shown',
     );
   });
 
@@ -118,12 +115,12 @@ void main() {
     var retryCount = 0;
 
     final controller = StateDropdownController(
-      citySource: _FakeStateSource(
+      citySource: FakeStateSource(
         callback: (countryId) async {
           retryCount++;
 
           if (retryCount == 1) {
-            throw Exception("Test error");
+            throw Exception('Test error');
           }
 
           return [
@@ -148,39 +145,39 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
 
     expect(
-      find.text("Try again"),
+      find.text('Try again'),
       findsOne,
-      reason: "Error happened, hence retry button should be shown",
+      reason: 'Error happened, hence retry button should be shown',
     );
 
-    await tester.tap(find.text("Try again"));
+    await tester.tap(find.text('Try again'));
     await tester.pump(const Duration(seconds: 1));
 
     expect(
-      find.text("Try again"),
+      find.text('Try again'),
       findsNothing,
-      reason: "After successful retry, error button should be hidden",
+      reason: 'After successful retry, error button should be hidden',
     );
 
-    await tester.tap(find.text("Select a state..."), warnIfMissed: false);
+    await tester.tap(find.text('Select a state...'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(
-      find.text("California"),
+      find.text('California'),
       findsWidgets,
-      reason: "After retry, California state should be visible in dropdown",
+      reason: 'After retry, California state should be visible in dropdown',
     );
     expect(
-      find.text("Texas"),
+      find.text('Texas'),
       findsWidgets,
-      reason: "After retry, Texas state should be visible in dropdown",
+      reason: 'After retry, Texas state should be visible in dropdown',
     );
   });
 
   testWidgets('can select state', (tester) async {
     StateModel? selectedState;
     final controller = StateDropdownController(
-      citySource: _FakeStateSource(
+      citySource: FakeStateSource(
         callback: (countryId) async {
           return [
             StateModel(id: '1', name: 'California'),
@@ -205,28 +202,28 @@ void main() {
     controller.loadCountries('test-country');
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text("Select a state..."), warnIfMissed: false);
+    await tester.tap(find.text('Select a state...'), warnIfMissed: false);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text("California").last);
+    await tester.tap(find.text('California').last);
     await tester.pumpAndSettle();
 
     expect(
       selectedState,
       isNotNull,
-      reason: "State should be selected when tapping dropdown option",
+      reason: 'State should be selected when tapping dropdown option',
     );
     expect(
       selectedState?.id,
-      "1",
-      reason: "Selected state should have correct ID (California)",
+      '1',
+      reason: 'Selected state should have correct ID (California)',
     );
   });
 
   testWidgets('loads states for correct country id', (tester) async {
     String? receivedCountryId;
     final controller = StateDropdownController(
-      citySource: _FakeStateSource(
+      citySource: FakeStateSource(
         callback: (countryId) async {
           receivedCountryId = countryId;
           return [StateModel(id: '1', name: 'California')];
@@ -251,7 +248,7 @@ void main() {
       receivedCountryId,
       equals('specific-country-123'),
       reason:
-          "StateSource should receive the correct country ID when loading states",
+          'StateSource should receive the correct country ID when loading states',
     );
   });
 }

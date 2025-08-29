@@ -47,7 +47,7 @@ class CountryDropdownController extends ValueNotifier<CountryDropdownState> {
       value = CountryDropdownState.error(error);
     } on TimeoutException catch (error, stackTrace) {
       value = CountryDropdownState.error(error);
-      Analytics.logEvent("country_dropdown/timeout");
+      Analytics.logEvent('country_dropdown/timeout');
       Analytics.reportError(error, stackTrace);
     } catch (error, stackTrace) {
       value = CountryDropdownState.error(error);
@@ -80,12 +80,12 @@ class CountryDropdown extends StatelessWidget {
                 Analytics.logEvent('country_dropdown/retry');
                 controller.loadCountries();
               },
-              label: Text("Try again"),
+              label: Text('Try again'),
               icon: Icon(Icons.warning),
             );
           case CountryDropdownStateData():
             return DropdownMenu<CountryModel>(
-              hintText: "Select a country...",
+              hintText: 'Select a country...',
               onSelected: (countryModel) {
                 Analytics.logEvent(
                   'country_dropdown/country_selected',
